@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+{% load md2 %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        <h1>{% block title %} {{ article.title }} {% endblock title %}</h1>
+        <p class=" text-muted">{{ article.author }} | {{ article.created_on }}</p>
+        <p class="card-text ">{{ article.content | markdown:"safe, code-friendly, code-color" }}</p> 
+      </div>
+    </div>
+    {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+  </div>
+</div>
+
+{% endblock content %}
