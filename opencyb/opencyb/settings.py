@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_markdown2',
     'news',
+    'projects',
     'articles',
 ]
 
