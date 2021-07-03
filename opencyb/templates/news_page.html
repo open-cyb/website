@@ -1,5 +1,7 @@
 {% extends "base.html" %} 
 {% block content %}
+{% load md2 %}
+
 <style>
     body {
         font-family: "Roboto", sans-serif;
@@ -25,7 +27,7 @@
                 <div class="card-body">
                     <h2 class="card-title">{{ new.title }}</h2>
                     <p class="card-text text-muted h6">{{ new.author }} | {{ new.created_on}} </p>
-                    <p class="card-text">{{new.content|slice:":200" }}</p>
+                    <p class="card-text">{{new.content| markdown:"safe, code-friendly, code-color" |slice:":200" }}</p>
                     <a href="{% url 'new_detail' new.slug  %}" class="btn btn-primary">Читать далее &rarr;</a>
                 </div>
             </div>
