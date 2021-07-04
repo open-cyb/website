@@ -24,5 +24,6 @@ urlpatterns = [
     path('news/', include('news.urls')),
     path('projects/', include('projects.urls')),
     path('articles/', include('articles.urls')),
-    path('contacts/', TemplateView.as_view(template_name='contacts.html'), name='contacts_page')
+    path('contacts/', TemplateView.as_view(template_name='contacts.html'), name='contacts_page'),
+    path('search', views.search, name='search_page'),
 ]
