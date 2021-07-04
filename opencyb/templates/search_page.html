@@ -1,0 +1,55 @@
+{% extends "base.html" %} 
+{% block content %}
+{% load md2 %}
+
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-color: #fdfdfd;
+    }
+    
+    .head_text {
+        color: white;
+    }
+    
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <center>
+        {% if searched %}
+            <h1>Результаты поиска "{{ searched }}":</h1>
+            <br/>
+            {% if news_results %}
+            <h2>Найденные новости:</h2>
+                {% for new in news_results %}
+                    <a href="{% url 'new_detail' new.slug %}">{{ new.title }}</a>
+                    <br/>
+                {% endfor %}
+            {% endif %}
+            {% if projects_results %}
+            <h2>Найденные проекты:</h2>
+                {% for project in projects_results %}
+                    <a href="{% url 'project_detail' project.slug %}">{{ project.title }}</a>
+                    <br/>
+                {% endfor %}
+            {% endif %}
+            {% if articles_results %}
+            <h2>Найденные статьи:</h2>
+                {% for article in articles_results %}
+                    <a href="{% url 'article_detail' article.slug %}">{{ article.title }}</a>
+                    <br/>
+                {% endfor %}
+            {% endif %}
+        {% else %}
+            <h1>Введите запрос</h1>
+        {% endif %}
+        </center>
+    </div>
+    {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+</div>
+{%endblock%}
