@@ -49,7 +49,10 @@ INSTALLED_APPS = [
     'news',
     'projects',
     'articles',
-    'articles.templatetags',
+    'articles.templatetags'
+    #'articles.articles_tags',
+    #'news.news_tags',
+    #'projects.projects_tags',
 ]
 
 MIDDLEWARE = [

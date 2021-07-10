@@ -1,6 +1,7 @@
 {% extends "base.html" %} 
 {% block content %}
 {% load md2 %}
+{% load customtags %}
 
 <style>
     body {
@@ -50,12 +51,14 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ new.title }}</h2>
-                    <p class="card-text">{{new.content| markdown:"safe, code-friendly, code-color" | slice:":200" }}</p>
-                    <a href="{% url 'new_detail' new.slug  %}" class="btn btn-primary float-right">Читать далее &rarr;</a>
+                    <p class="card-text">{{new.content | preview | markdown:"safe, code-friendly, code-color" }}</p>
                 </div>
                 <div class="card-footer text-muted">
-                    <p class="card-text text-muted h6 float-left">Автор: {{ new.author }}</p>
-                    <p class="card-text text-muted h6 float-right">Дата: {{ new.created_on}}</p>
+                    <div class="float-left m-0">
+                        <p class="card-text text-muted h6 float-top mb-0">Дата: {{ new.created_on}}</p>
+                        <p class="card-text text-muted h6 float-bottom mt-0">Автор: {{ new.author }}</p>
+                    </div>
+                    <a href="{% url 'new_detail' new.slug  %}" class="btn btn-primary float-right">Читать далее &rarr;</a>
                 </div>
             </div>
             {% endfor %}
