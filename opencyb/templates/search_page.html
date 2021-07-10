@@ -31,17 +31,17 @@
                     <br/>
                 {% endfor %}
             {% endif %}
-            {% if projects_results %}
-            <h2>Найденные проекты:</h2>
-                {% for project in projects_results %}
-                    <a href="{% url 'project_detail' project.slug %}">{{ project.title }}</a>
-                    <br/>
-                {% endfor %}
-            {% endif %}
             {% if articles_results %}
             <h2>Найденные статьи:</h2>
                 {% for article in articles_results %}
                     <a href="{% url 'article_detail' article.slug %}">{{ article.title }}</a>
+                    <br/>
+                {% endfor %}
+            {% endif %}
+            {% if projects_results %}
+            <h2>Найденные проекты:</h2>
+                {% for project in projects_results %}
+                    <a href="{% url 'project_detail' project.slug %}">{{ project.title }}</a>
                     <br/>
                 {% endfor %}
             {% endif %}
