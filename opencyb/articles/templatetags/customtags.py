@@ -1,5 +1,6 @@
 from django import template
 from bs4 import BeautifulSoup
+import markdown
 
 register = template.Library()
 
@@ -30,3 +31,9 @@ def html_edit(value):
     html_content = str(soup)
     
     return html_content
+
+@register.filter
+def custom_markdown(value):
+    md_text = value
+    html = markdown.markdown(md_text, extensions=['fenced_code', 'codehilite'])
+    return html
