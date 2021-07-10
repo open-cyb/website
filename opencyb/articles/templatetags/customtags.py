@@ -9,7 +9,6 @@ def preview(value):
 
 @register.filter
 def html_edit(value):
-    print(type(value))
     soup = BeautifulSoup(value)
     # Add id to image (for open by click)
     for img in soup.find_all('img'):
