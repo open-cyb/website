@@ -1,6 +1,28 @@
 {% extends 'base.html' %} {% block content %}
 {% load md2 %}
 
+<style>
+  /* Markdown custom templates */
+    /* "preview" templates */
+    img[alt$="preview"] {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: auto;
+      float: none!important;
+    }
+
+    /* Content images types */
+    /* img-type1: centered image on all div width */
+    img[alt="img-type1"] {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: auto;
+      float: none!important;
+    }
+</style>
+
 <div class="container">
   <div class="row">
     <div class="col-md-8 card mb-4  mt-3 left  top">
