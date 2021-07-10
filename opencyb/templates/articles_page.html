@@ -60,7 +60,7 @@
                         <p class="card-text text-muted h6 float-top mb-0">Дата: {{ article.created_on}}</p>
                         <p class="card-text text-muted h6 float-bottom mt-0">Автор: {{ article.author }}</p>
                     </div>
-                    <a href="{% url 'article_detail' article.slug  %}" class="btn btn-primary float-right">Читать далее &rarr;</a>
+                    <a href="{% url 'article_detail' article.slug  %}" class="btn btn-primary float-right">Подробнее &rarr;</a>
                 </div>
             </div>
             {% endfor %}
