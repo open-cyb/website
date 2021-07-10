@@ -65,6 +65,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 ROOT_URLCONF = 'opencyb.urls'
 
 TEMPLATES_DIRS = BASE_DIR.joinpath('templates')
