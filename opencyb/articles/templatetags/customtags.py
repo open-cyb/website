@@ -18,10 +18,12 @@ def html_edit(value):
     # Replace all youtube-link to iframe video integrated to html code
     for a in soup.find_all(text="youtube-link"):
         link = a.parent['href']
-        a.parent.name='iframe'
-        a.parent['src']=link
+        a.parent.name='object'
+        a.parent['data']=link
         a.parent['width']='70%'
         a.parent['height']='auto'
+        # <param name="allowFullScreen" value="true">
+        a.parent.append(soup.new_tag("param"))
         #new_tag = soup.net_tag("iframe", src=link)
         #a.parent.parent.append(new_tag)
         #a.extract()
