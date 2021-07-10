@@ -51,7 +51,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ article.title }}</h2>
-                    <p class="card-text">{{article.content| markdown:"safe, code-friendly, code-color" | slice:":200" }}</p>
+                    <p class="card-text">{{article.content| markdown:"safe, code-friendly, code-color" | slice:":300" }}</p>
                     <a href="{% url 'article_detail' article.slug  %}" class="btn btn-primary float-right">Читать далее &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
