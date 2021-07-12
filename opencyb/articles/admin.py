@@ -15,6 +15,9 @@ class CommentAdmin(admin.ModelAdmin):
 
     def approve_comments(self, request, queryset):
         queryset.update(active=True)
+    
+    def hide_comments(self, request, queryset):
+        queryset.update(active=False)
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment, CommentAdmin)

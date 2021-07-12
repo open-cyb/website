@@ -12,6 +12,12 @@
       </div>
     </div>
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+
+    {% with post=project %}
+      {% block comments %} {% include 'post_comments.html' %} {% endblock %}
+    {% endwith %}
+
+    {% block comment_form %} {% include 'post_comment_form.html' %} {% endblock %}
   </div>
 </div>
 

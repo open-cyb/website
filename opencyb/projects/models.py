@@ -20,3 +20,18 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    website = models.URLField(max_length = 200, blank=True)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['created_on']
+
+    def __str__(self):
+        return 'Comment: {} by {}'.format(self.body[:50]+'...', self.name)
