@@ -60,10 +60,23 @@
                 position: fixed;
                 bottom: 26px;
                 right: 39px;
-                z-index: 98;
+                /* z-index: 98; */
                 padding: 21px;
-                background-color: rgba(209, 209, 209, 0.8);
-                border-radius: 1%;
+                background-color: rgba(226, 226, 226, 0.767);
+                border-radius: 50%;
+                width: 57px;
+                height: 57px;
+            }
+
+            .arrow {
+                border: solid rgb(141, 141, 141);
+                border-width: 0 6px 6px 0;
+                display: inline-block;
+                padding: 6px;
+            }
+            .up {
+                transform: rotate(-135deg);
+                -webkit-transform: rotate(-135deg);
             }
 
             pre { line-height: 125%; }
@@ -178,20 +191,6 @@
                 </a>
             </div>
         </div>
-
-        <!-- Back to top button -->
-        <style>
-            .arrow {
-                border: solid black;
-                border-width: 0 3px 3px 0;
-                display: inline-block;
-                padding: 3px;
-            }
-            .up {
-                transform: rotate(-135deg);
-                -webkit-transform: rotate(-135deg);
-            }
-        </style>
 
         <!-- Footer -->
         <footer class="py-3 bg-grey float-bottom">
