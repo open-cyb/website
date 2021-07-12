@@ -1,33 +1,6 @@
-{% extends "base.html" %} 
-{% block content %}
-{% load md2 %}
+{% extends "base.html" %} {% block content %}
 {% load customtags %}
-
-<style>
-    body {
-        font-family: "Roboto", sans-serif;
-        font-size: 18px;
-        background-color: #fdfdfd;
-    }
-    
-    .head_text {
-        color: white;
-    }
-    
-    .card {
-        box-shadow: 0 16px 48px #E3E7EB;
-    }
-
-    /* Markdown custom templates */
-    /* "preview" templates */
-  
-    img[alt="preview <"] {
-        float: left;
-        max-width: 30%;
-        height:auto;
-        padding-right: 10px;
-    }
-</style>
+{% block posts_page %} {% include 'posts_page.html' %} {% endblock posts_page %}
 
 <div class="container">
     <div class="row">
@@ -37,7 +10,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ new.title }}</h2>
-                    <p class="card-text">{{new.content | preview | markdown:"safe, code-friendly, code-color" }}</p>
+                    <p class="card-text">{{new.content | preview | custom_markdown | safe }}</p>
                 </div>
                 <div class="card-footer text-muted">
                     <div class="float-left m-0">

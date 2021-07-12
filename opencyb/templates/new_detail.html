@@ -1,27 +1,6 @@
 {% extends 'base.html' %} {% block content %}
-{% load md2 %}
-
-<style>
-  /* Markdown custom templates */
-    /* "preview" templates */
-    img[alt="preview <"] {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      margin: auto;
-      float: none!important;
-    }
-
-    /* Content images types */
-    /* img-type1: centered image on all div width */
-    img[alt="img-type1"] {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      margin: auto;
-      float: none!important;
-    }
-</style>
+{% load customtags %}
+{% block post_detail %} {% include 'post_detail.html' %} {% endblock %}
 
 <div class="container">
   <div class="row">
@@ -29,7 +8,7 @@
       <div class="card-body">
         <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
         <p class=" text-muted">{{ new.author }} | {{ new.created_on }}</p>
-        <p class="card-text ">{{ object.content | markdown:"safe, code-friendly, code-color" }}</p> <!--| safe --> 
+        <p class="card-text ">{{ object.content | custom_markdown | html_edit | safe }}</p> <!--| safe --> 
       </div>
     </div>
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
