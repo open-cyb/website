@@ -1,19 +1,36 @@
 {% block sidebar %}
+{% load customtags %}
 
 <style>
         .card{
             box-shadow: 0 16px 48px #E3E7EB;
         }
        
+        hr {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        hr.solid {
+            border-top: 3px solid #bbb;
+        }
 </style>
 
 <!-- Sidebar Widgets Column -->
 <div class="col-md-4 float-right ">
     <div class="card my-4">
         <div class="card-body">
-            <p class="card-text">Последние <a href="{% url 'home' %}" class="stretched-link link-primary">новости</a>:</p>
-            <p class="card-text">Последние <a href="{% url 'articles_page' %}" class="stretched-link link-primary">статьи</a>:</p>
-            <p class="card-text">Последние <a href="{% url 'projects_page' %}" class="stretched-link link-primary">проекты</a>:</p>
+            <h5>Последние новости</h5>
+            {% render_recent_news %}
+            <br>
+            <h5>Свежие статьи</h5>
+            {% render_recent_articles %}
+            <br>
+            <h5>Проекты</h5>
+            {% render_recent_projects %}
+            <br>
         </div>
     </div>
 </div>

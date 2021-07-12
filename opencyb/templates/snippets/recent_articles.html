@@ -1,0 +1,5 @@
+<ul class="list-group list-group-flush">
+    {% for article in articles_list %}
+        <li class="list-group-item"><a href="{% url 'article_detail' article.slug  %}"> {{ article.title }}</a></li>
+    {% endfor %}
+</ul>
