@@ -1,5 +1,5 @@
 <ul class="list-group list-group-flush">
     {% for comment in comments_list %}
-        <li class="list-group-item">{% if comment.4 %} <a href="{{ comment.4 }}" target="_blank">{{ comment.1 }}</a> {% else %} {{ comment.1 }} {% endif %} к записи <a href="{{ comment.2 }}" target="_blank">{{ comment.3 }}</a></li>
+        <li class="list-group-item">{% if comment.4 %} <a href="{{ comment.4 }}" target="_blank">{{ comment.1 }}</a> {% else %} {{ comment.1 }} {% endif %} к записи <a href="{{ comment.2 }}">{{ comment.3 }}</a></li>
     {% endfor %}
 </ul>
