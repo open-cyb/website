@@ -1,0 +1,38 @@
+{% block comment_form %}
+<div class="col-md-8 card mb-4  mt-3 ">
+    <div class="card-body">
+      {% if new_comment %}
+      <div class="alert alert-success" role="alert">
+        Ваш комментарий ожидает модерации
+      </div>
+      {% else %}
+      <h3>Оставить комментарий</h3>
+      <form method="post" style="margin-top: 1.3em;">
+        <!-- {{ comment_form.as_p }} -->
+          <div class="form-group">
+            <label for="inputAddress">Имя</label>
+            <input name="name" type="text" class="form-control" id="id_name" maxlength="80" placeholder="Имя">
+            <!-- {{ comment_form.name }} -->
+          </div>
+          <div class="form-group">
+            <label for="inputEmail4">Email</label>
+            <input name="email" type="email" class="form-control" id="id_email" maxlength="254" placeholder="Email">
+            <!-- {{ comment_form.email }} -->
+          </div>
+          <div class="form-group">
+            <label for="inputAddress2">Web-Сайт</label>
+            <input name="website" type="url" class="form-control" id="id_website" maxlength="200" placeholder="https://opencyb.com">
+            <!-- {{ comment_form.website }} -->
+          </div>
+          <div class="form-group">
+            <label for="inputAddress2">Комментарий</label>
+            <textarea name="body" class="form-control" id="id_body" cols="40" rows="10" required="" placeholder="Комментарий..."></textarea>
+            <!-- {{ comment_form.body }} -->
+          </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary  btn-lg">Отправить</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

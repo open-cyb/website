@@ -8,10 +8,17 @@
       <div class="card-body">
         <h1>{% block title %} {{ article.title }} {% endblock title %}</h1>
         <p class=" text-muted">{{ article.author }} | {{ article.created_on }}</p>
-        <p class="card-text ">{{ article.content | custom_markdown | html_edit | safe }}</p> 
+        <p class="card-text ">{{ article.content | custom_markdown | html_edit | safe }}</p>
       </div>
     </div>
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+    
+    {% with post=article %}
+      {% block comments %} {% include 'post_comments.html' %} {% endblock %}
+    {% endwith %}
+
+    {% block comment_form %} {% include 'post_comment_form.html' %} {% endblock %}
+    
   </div>
 </div>
 

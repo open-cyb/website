@@ -1,0 +1,28 @@
+{% block comments %}
+    {% if comments.count > 0 %}
+        <div class="col-md-8 card mb-4  mt-3 ">
+            <div class="card-body">
+                <!-- comments -->
+                <h3>{{ post.title }}</h3>
+                <h4>Количество комментариев: {{ comments.count }}</h4>
+
+                {% for comment in comments %}
+                    <div class="comments" style="padding: 10px;">
+                        <p class="font-weight-bold">
+                            <img src="https://i.imgur.com/SheAhZj.png" alt="Avatar" class="avatar">
+                            {% if comment.website %}
+                                <a href="{{ comment.website }}" target="_blank">{{ comment.name }}</a>
+                            {% else %}
+                                {{ comment.name }}
+                            {% endif %}
+                            <span class=" text-muted font-weight-normal">
+                                {{ comment.created_on }}
+                            </span>
+                        </p>
+                    {{ comment.body | linebreaks }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
