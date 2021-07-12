@@ -47,18 +47,38 @@ def custom_markdown(value):
 
 @register.inclusion_tag('snippets/recent_articles.html')
 def render_recent_articles():
+    recent_articles_list = articles_models.Article.objects.filter(status=1)[:3]
     return {
-        'articles_list': articles_models.Article.objects.all().order_by('created_on')[::-1][:3]
+        'articles_list': recent_articles_list
     }
 
 @register.inclusion_tag('snippets/recent_news.html')
 def render_recent_news():
+    recent_news_list = news_models.New.objects.all().filter(status=1)[:3]
     return {
-        'news_list': news_models.New.objects.all().order_by('created_on')[::-1][:3]
+        'news_list': recent_news_list
     }
 
 @register.inclusion_tag('snippets/recent_projects.html')
 def render_recent_projects():
+    recent_projects_list = projects_models.Project.objects.all().filter(status=1)[:3]
     return {
-        'projects_list': projects_models.Project.objects.all().order_by('created_on')[::-1][:3]
+        'projects_list': recent_projects_list
+    }
+
+@register.inclusion_tag('snippets/recent_comments.html')
+def render_recent_comments():
+    recent_articles_comments = articles_models.Comment.objects.all().filter(active=True)
+    recent_news_comments = news_models.Comment.objects.all().filter(active=True)
+    recent_projects_comments = projects_models.Comment.objects.all().filter(active=True)
+    recent_comments = []
+    for i in recent_articles_comments:
+        recent_comments.append([i.created_on, i.name, 'https://opencyb.com/articles/%s'%i.article.slug, '%s..'%i.article.title[:32], i.website])
+    for i in recent_news_comments:
+        recent_comments.append([i.created_on, i.name, 'https://opencyb.com/news/%s'%i.new.slug, '%s..'%i.new.title[:32], i.website])
+    for i in recent_projects_comments:
+        recent_comments.append([i.created_on, i.name, 'https://opencyb.com/projects/%s'%i.project.slug, '%s..'%i.project.title[:32], i.website])
+    recent_comments = sorted(recent_comments, key=lambda x: x[0], reverse = True)[:4]
+    return {
+        'comments_list': recent_comments
     }
