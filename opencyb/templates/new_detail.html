@@ -1,6 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 {% load customtags %}
-{% block post_detail %} {% include 'post_detail.html' %} {% endblock %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/postcontent.css' %}"/>
 
 <div class="container">
   <div class="row">

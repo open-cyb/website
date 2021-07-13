@@ -1,9 +1,4 @@
-{% block post_detail %}
-
-<!-- Скрипты и стили для страчек просмотра поста -->
-
-<script>
-    function lockScroll(){
+function lockScroll(){
     $html = $('html'); 
     $body = $('body'); 
     var initWidth = $body.outerWidth();
@@ -69,45 +64,4 @@ $('img.popup-image').css({cursor: 'pointer'}).live('click', function () {
     }).insertAfter(this).animate({
         'opacity': 1
     }, 300);
-    });
-</script>
-
-<style>
-    /* Markdown custom templates */
-    /* "preview" templates */
-    img[alt="preview <"] {
-        display: block;
-        max-width: 100%;
-        height: auto;
-        margin: auto;
-        float: none!important;
-    }
-
-    /* Content images types */
-    /* img-type1: centered image on all div width */
-    img[alt="img-type1"] {
-        display: block;
-        max-width: 100%;
-        height: auto;
-        margin: auto;
-        float: none!important;
-    }
-
-    .youtube-video {
-        display:block;
-        margin: auto;
-        max-width: 100%;
-        height:auto;
-        float: none!important;
-    }
-
-    .avatar {
-        vertical-align: middle;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        margin-right: 5px;
-    }
-</style>
-
-{% endblock post_detail %}
+});

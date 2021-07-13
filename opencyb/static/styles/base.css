@@ -42,3 +42,11 @@ body {
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
 }
+
+.head_text {
+    color: white;
+}
+
+.card {
+    box-shadow: 0 16px 48px #E3E7EB;
+}
