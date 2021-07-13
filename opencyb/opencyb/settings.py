@@ -46,15 +46,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_markdown2',
     'news',
     'projects',
     'articles',
     'articles.templatetags'
-    #'articles.articles_tags',
-    #'news.news_tags',
-    #'projects.projects_tags',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
