@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 from django.views.generic.base import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +28,4 @@ urlpatterns = [
     path('articles/', include('articles.urls')),
     path('contacts/', TemplateView.as_view(template_name='contacts.html'), name='contacts_page'),
     path('search', views.search, name='search_page'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
