@@ -17,7 +17,7 @@
                         <p class="card-text text-muted h6 float-top mb-0">Дата: {{ new.created_on}}</p>
                         <p class="card-text text-muted h6 float-bottom mt-0">Автор: {{ new.author }}</p>
                     </div>
-                    <a href="{% url 'new_detail' new.slug  %}" class="btn btn-primary float-right">Читать далее &rarr;</a>
+                    <a href="{% url 'new_detail' new.slug  %}" class="btn btn-outline-info float-right">Читать далее &rarr;</a>
                 </div>
             </div>
             {% endfor %}
