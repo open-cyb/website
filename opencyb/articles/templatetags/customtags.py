@@ -85,14 +85,15 @@ def render_recent_comments(context):
     recent_projects_comments = projects_models.Comment.objects.all().filter(active=True)
     recent_comments = []
 
+    max_title_length = 100
     for i in recent_articles_comments: # i.article.slug
-        recent_comments.append([i.created_on, i.name, template_url.format(domain, 'articles', i.article.slug, i.id), '%s..'%i.article.title[:32], i.website, i.id])
+        recent_comments.append([i.created_on, i.name, template_url.format(domain, 'articles', i.article.slug, i.id), '%s..'%i.article.title[:max_title_length] if len(i.article.title) > max_title_length else i.article.title, i.website, i.id])
     
     for i in recent_news_comments:
-        recent_comments.append([i.created_on, i.name, template_url.format(domain, 'news', i.new.slug, i.id), '%s..'%i.new.title[:32], i.website, i.id])
+        recent_comments.append([i.created_on, i.name, template_url.format(domain, 'news', i.new.slug, i.id), '%s..'%i.new.title[:max_title_length] if len(i.new.title) > max_title_length else i.new.title, i.website, i.id])
     
     for i in recent_projects_comments:
-        recent_comments.append([i.created_on, i.name, template_url.format(domain, 'projects', i.project.slug, i.id), '%s..'%i.project.title[:32], i.website, i.id])
+        recent_comments.append([i.created_on, i.name, template_url.format(domain, 'projects', i.project.slug, i.id), '%s..'%i.project.title[:max_title_length] if len(i.project.title) > max_title_length else i.project.title, i.website, i.id])
     
     recent_comments = sorted(recent_comments, key=lambda x: x[0], reverse = True)[:4]
 
