@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'news',
     'projects',
     'articles',
-    'articles.templatetags'
+    'articles.templatetags',
+    'users'
 ]
 
 SITE_ID = 1
