@@ -32,7 +32,7 @@ secret_credentials = SourceFileLoader('module.secret_credentials', '{}/secret_cr
 SECRET_KEY = secret_credentials.secret_key['key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -139,11 +139,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(REPOSITORY_DIR, 'static')
+# STATIC_ROOT = "/var/www/opencyb-website/opencyb/static/"
 
+# STATICFILES_DIRS = (
+#     os.path.join(REPOSITORY_DIR, 'static'),
+# )
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 # STATICFILES_DIRS = [
-#         os.path.join(BASE_DIR, 'static')
-#         ]
+#     os.path.join(BASE_DIR, 'static'),
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

@@ -29,4 +29,4 @@ urlpatterns = [
     # path('contacts/', TemplateView.as_view(template_name='contacts.html'), name='contacts_page'),
     path('search', views.search, name='search_page'),
     path('contacts/', include('users.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
