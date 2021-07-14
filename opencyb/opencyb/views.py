@@ -10,7 +10,6 @@ def redirect_to_news(request):
 def search(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        #search_results = New.objects.filter(content__contains=searched) + New.objects.filter(content_contains=searched) + Article.objects.filter(content__contains=searched) + Article.objects.filter(content_contains=searched) + Project.objects.filter(content__contains=searched) + Project.objects.filter(content_contains=searched)
         news_results = New.objects.filter(title__contains=searched) | New.objects.filter(content__contains=searched)
         projects_results = Project.objects.filter(title__contains=searched) | Project.objects.filter(content__contains=searched)
         articles_results = Article.objects.filter(title__contains=searched) | Article.objects.filter(content__contains=searched)
