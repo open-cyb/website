@@ -19,11 +19,12 @@ img[alt="img-type1"] {
 }
 
 .youtube-video {
-    display:block;
-    margin: auto;
-    max-width: 100%;
-    height:auto;
-    float: none!important;
+    /* display:block; */
+    /* margin: auto; */
+    /* text-align: center; */
+    /* max-width: 100%; */
+    /* height:auto; */
+    /* float: none!important; */
 }
 
 .avatar {
