@@ -10,8 +10,13 @@
             <p class="text-secondary">{{ profile.slug }}</p>
             <p class="text-secondary">{{ profile.phone_number }}</p>
             <p class="text-secondary">{{ profile.email }}</p>
-            <p class="text-secondary">{{ profile.links_json }}</p>
             <p class="text-secondary">{{ profile.description }}</p>
+            {% if link_vk %}
+                <p class="text-secondary">Вконтакте: <a href="{{ link_vk }}" target="_blank">{{ profile.user.first_name }}</a></p>
+            {% endif %}
+            {% if link_telegram %}
+                <p class="text-secondary">Telegram: <a href="{{ link_telegram }}" target="_blank">{{ profile.user.username }}</a></p>
+            {% endif %}
         </div>
     </div>
 </div>

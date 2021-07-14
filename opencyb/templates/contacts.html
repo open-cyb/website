@@ -10,20 +10,31 @@
                     <li class="list-group-item">
                         <div class="row w-100">
                             <div class="col-12 col-sm-6 col-md-3 px-0">
-                                <img src="{{ profile.image }}" alt="Profile image" class="rounded-circle mx-auto d-block img-fluid" width="120" height="auto">
+                                <img src="{{ profile.profile.image }}" alt="Profile image" class="rounded-circle mx-auto d-block img-fluid" width="120" height="auto">
                             </div>
                             <div class="col-12 col-sm-6 col-md-9 text-center text-sm-left">
                                 <span class="fa fa-mobile fa-2x text-success float-right pulse" title="online now"></span>
-                                <label class="name lead">{{ profile.user.first_name }} {{ profile.user.last_name }}, <a href="{% url 'profile_detail' profile.slug %}">{{ profile.user.username }}</a></label> 
+                                <label class="name lead">{{ profile.profile.user.first_name }} {{ profile.profile.user.last_name }}, <a href="{% url 'profile_detail' profile.profile.slug %}">{{ profile.profile.user.username }}</a></label> 
                                 <br>
                                 <span class="fa fa-phone fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="+7 (951) 839 73-06"></span>
-                                <span class="text-muted small">{{ profile.phone_number }}</span>
+                                <span class="text-muted small">{{ profile.profile.phone_number }}</span>
                                 <br>
                                 <!-- <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
                                 <span class="text-muted small text-truncate">Вконтакте: <a href="https://vk.com/id177176834" target="_blank">Даниил</a></span>
                                 <br> -->
                                 <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
-                                <span class="text-muted small text-truncate">{{ profile.email }}</span>
+                                <span class="text-muted small text-truncate">{{ profile.profile.email }}</span>
+                                <br>
+                                {% if profile.links.link_vk %}
+                                    <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
+                                    <span class="text-muted small text-truncate">Вконтакте: <a href="{{ profile.links.link_vk }}" target="_blank">{{ profile.profile.user.first_name }}</a></span>
+                                    <br>
+                                {% endif %}
+                                {% if profile.links.link_telegram %}
+                                    <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
+                                    <span class="text-muted small text-truncate">Телеграм: <a href="{{ profile.links.link_telegram }}" target="_blank">{{ profile.profile.user.username }}</a></span>
+                                    <br>
+                                {% endif %}
                             </div>
                         </div>
                     </li>
