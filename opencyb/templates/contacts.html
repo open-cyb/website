@@ -1,45 +1,81 @@
 {% extends "base.html" %} 
 {% block content %}
 
-<div class="container">
+<style>
+    img[alt="contacts-image"] {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: auto;
+        margin-bottom: 15px;
+        float: none!important;
+        border-radius: 3px;
+    }
+
+    #info {
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 35px;
+    }
+
+    #info-text {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    #contacts-list {
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-bottom: 30px;
+    }
+</style>
+
+<div class="container" style="margin-top:2%">
     <!-- contacts card -->
     <div class="card card-default" id="card_contacts">
-        <div id="contacts" class="panel-collapse collapse show" aria-expanded="true" style="">
-            <ul class="list-group pull-down" id="contact-list">
-                {% for profile in profiles %}
-                    <li class="list-group-item">
-                        <div class="row w-100">
-                            <div class="col-12 col-sm-6 col-md-3 px-0">
-                                <img src="{{ profile.profile.image }}" alt="Profile image" class="rounded-circle mx-auto d-block img-fluid" width="120" height="auto">
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-9 text-center text-sm-left">
-                                <span class="fa fa-mobile fa-2x text-success float-right pulse" title="online now"></span>
-                                <label class="name lead">{{ profile.profile.user.first_name }} {{ profile.profile.user.last_name }}, <a href="{% url 'profile_detail' profile.profile.slug %}">{{ profile.profile.user.username }}</a></label> 
-                                <br>
-                                <span class="fa fa-phone fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="+7 (951) 839 73-06"></span>
-                                <span class="text-muted small">{{ profile.profile.phone_number }}</span>
-                                <br>
-                                <!-- <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
-                                <span class="text-muted small text-truncate">Вконтакте: <a href="https://vk.com/id177176834" target="_blank">Даниил</a></span>
-                                <br> -->
-                                <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
-                                <span class="text-muted small text-truncate">{{ profile.profile.email }}</span>
-                                <br>
-                                {% if profile.links.link_vk %}
-                                    <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
-                                    <span class="text-muted small text-truncate">Вконтакте: <a href="{{ profile.links.link_vk }}" target="_blank">{{ profile.profile.user.first_name }}</a></span>
+        <div id="contacts" class="panel-collapse collapse show" aria-expanded="true">
+            <div id="info">
+                <img alt="contacts-image" class="popup-image" src="https://i.imgur.com/AOkRhUi.png">
+                <div id="info-text">
+                    <h1>Кто мы?</h1>
+                    <p>Добро пожалось на сайт Open Cybernetics. Мы - группа энтузиатов, занимающиеся разработкой проектов в области инженерии, it-технологий, компьютерной безопасности и тд. </p>
+                    <p>На сайте будут публиковаться новости, связанные с нашей деятельностью, а так же проекты и статьи, созданные участниками группы. Все наши проекты - Open source, все исходные коды, 3д-модели доступны для редактирования и доработки.</p>
+                    <p>Мы ежегодно принимаем участие в различных хакатонах, неоднократно становились призёрами и победителями оных). Так же неоднократно принимали участие в студенческих научных конференциях.</p>
+                </div>
+            </div>
+            <div id="contacts-list">
+                <h1>Наши контакты</h1>
+                <ul class="list-group pull-down" id="contact-list">
+                    {% for profile in profiles %}
+                        <li class="list-group-item">
+                            <div class="row w-100">
+                                <div class="col-12 col-sm-6 col-md-2 px-0">
+                                    <img src="{{ profile.profile.image }}" alt="Profile image" class="rounded-circle mx-auto d-block img-fluid" width="120" height="auto">
+                                </div>
+                                <div class="col-12 col-sm-6 col-md-9 text-center text-sm-left">
+                                    <span class="fa fa-mobile fa-2x text-success float-right pulse" title="online now"></span>
+                                    <label class="name lead">{{ profile.profile.user.first_name }} {{ profile.profile.user.last_name }}, <a href="{% url 'profile_detail' profile.profile.slug %}">{{ profile.profile.user.username }}</a></label> 
                                     <br>
-                                {% endif %}
-                                {% if profile.links.link_telegram %}
                                     <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
-                                    <span class="text-muted small text-truncate">Телеграм: <a href="{{ profile.links.link_telegram }}" target="_blank">{{ profile.profile.user.username }}</a></span>
+                                    <span class="text-muted small text-truncate">Почта: {{ profile.profile.email }}</span>
                                     <br>
-                                {% endif %}
+                                    {% if profile.links.link_vk %}
+                                        <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
+                                        <span class="text-muted small text-truncate">Вконтакте: <a href="{{ profile.links.link_vk }}" target="_blank">{{ profile.profile.user.first_name }}</a></span>
+                                        <br>
+                                    {% endif %}
+                                    {% if profile.links.link_telegram %}
+                                        <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
+                                        <span class="text-muted small text-truncate">Телеграм: <a href="{{ profile.links.link_telegram }}" target="_blank">{{ profile.profile.user.username }}</a></span>
+                                        <br>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </div>
