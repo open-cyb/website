@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Article
 from .forms import CommentForm
 import django.views.generic as generic
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 class ArticlesList(generic.ListView):
     queryset = Article.objects.filter(status=1).order_by('-created_on')
@@ -27,6 +29,9 @@ def article_detail(request, slug):
             new_comment.article = article
             # Save the comment to the database
             new_comment.save()
+            
+            messages.success(request, "Ваш комментарий был отправлен на модерацию.")
+            return HttpResponseRedirect(request.path)
     else:
         comment_form = CommentForm()
     

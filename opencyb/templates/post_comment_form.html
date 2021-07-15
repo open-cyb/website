@@ -1,10 +1,12 @@
 {% block comment_form %}
 <div class="col-md-8 card mb-4  mt-3 ">
     <div class="card-body">
-      {% if new_comment %}
-      <div class="alert alert-success" role="alert">
-        Ваш комментарий ожидает модерации
-      </div>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
       {% else %}
       <h3>Оставить комментарий</h3>
       <p class="m-0 text-muted h7 text-left ">E-mail не будет опубликован. Он нужен для обратной связи.</p>
