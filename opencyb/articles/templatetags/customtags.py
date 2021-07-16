@@ -31,14 +31,25 @@ def html_edit(value):
     # Replace all youtube-link to iframe video integrated to html code
     for a in soup.find_all(text="youtube-link"):
         link = a.parent['href']
-        a.parent.name='iframe'
-        a.parent['width'] = '560'
-        a.parent['height'] = '315'
-        a.parent['src'] = link
-        a.parent['title']='Youtube video player'
-        a.parent['frameborder'] = '0'
-        a.parent['allow'] = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-        a.parent['allowfullscreen'] = None
+
+        div_video_tag = soup.new_tag('div')
+        div_video_tag['class'] = 'youtube-video' # Add class for add styles in .css
+        div_video_tag['style'] = "position: relative; width: 100%; height: 0; padding-bottom: 56.25%;"
+
+        iframe_tag = soup.new_tag('iframe')
+        iframe_tag['src'] = link
+        iframe_tag['frameborder'] = '0'
+        # iframe_tag['allow'] = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+        iframe_tag['allowfullscreen'] = None
+        iframe_tag['class'] = 'youtube-video-type1'
+        iframe_tag['style'] = "position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+        
+
+        div_video_tag.append(iframe_tag)
+        a.parent.parent.append(div_video_tag)
+
+        a.parent.extract() # Remove <a> with href (custom markdown style)
+        
         
     for link in soup.find_all('a', href=True):
         link['target'] = '_blank'
