@@ -139,20 +139,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#STATIC_ROOT = os.path.join(REPOSITORY_DIR, 'static')
-# STATIC_ROOT = "/var/www/opencyb-website/opencyb/static/"
-
-# STATICFILES_DIRS = (
-#     os.path.join(REPOSITORY_DIR, 'static'),
-# )
-
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
+
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
