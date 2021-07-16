@@ -7,15 +7,21 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
         <meta name="google" content="notranslate" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
         <script src="http://static.tumblr.com/xz44nnc/o5lkyivqw/jquery-1.3.2.min.js"></script>
         
+
         <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/base.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/codehilite.css' %}"/>
+        <!-- <link rel="stylesheet/less" type="text/css" href="{% static 'styles/background.less' %}"/> -->
         
-
+        <!-- <script src="https://cdn.jsdelivr.net/npm/less@4.1.1" ></script> -->
+        
         <script type="application/javascript" src="{% static 'scripts/scrolltop.js' %}"></script>
         <script type="application/javascript" src="{% static 'scripts/lockscroll.js' %}"></script>
         <script type="application/javascript" src="{% static 'scripts/scrolltoanchor.js' %}"></script>
@@ -25,46 +31,61 @@
     </head>
 
     <body>
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand text-black font-weight-bold" href="{% url 'home' %}">Open Cybernetics</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item text-black">
-                    <a class="nav-link text-black font-weight-bold" href="{% url 'articles_page' %}">Статьи</a>
-                </li>
-                <li class="nav-item text-black">
-                    <a class="nav-link text-black font-weight-bold" href="{% url 'projects_page' %}">Проекты</a>
-                </li>
-                <li class="nav-item text-black">
-                    <a class="nav-link text-black font-weight-bold" href="{% url 'contacts_page' %}">О нас</a>
-                </li>
-              </ul>
+        <div class="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand text-black font-weight-bold" href="{% url 'home' %}">Open Cybernetics</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item text-black">
+                            <a class="nav-link text-black font-weight-bold" href="{% url 'articles_page' %}">Статьи</a>
+                        </li>
+                        <li class="nav-item text-black">
+                            <a class="nav-link text-black font-weight-bold" href="{% url 'projects_page' %}">Проекты</a>
+                        </li>
+                        <li class="nav-item text-black">
+                            <a class="nav-link text-black font-weight-bold" href="{% url 'contacts_page' %}">О нас</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline" method="post" action="{% url 'search_page' %}">
+                        {% csrf_token %}
+                        <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search" name="searched">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
+                    </form>
+                </div>
+            </nav>
+            <div class="container">
+                {% block content %}
+                <!-- Content Goes here -->
+                {% endblock content %}
+                <div class="float-left">
+                    <a href="#" id="toTopBtn" class="cd-top text-replace js-cd-top cd-top--is-visible cd-top--fade-out" data-abc="true">
+                        <i class="arrow up"></i>
+                    </a>
+                </div>
             </div>
-            <form class="form-inline" method="post" action="{% url 'search_page' %}">
-                {% csrf_token %}
-                <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search" name="searched">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
-            </form>
-          </nav>
-        <div class="container">
-            {% block content %}
-            <!-- Content Goes here -->
-            {% endblock content %}
-            <div class="float-left">
-                <a href="#" id="toTopBtn" class="cd-top text-replace js-cd-top cd-top--is-visible cd-top--fade-out" data-abc="true">
-                    <i class="arrow up"></i>
-                </a>
-            </div>
-        </div>
 
-        <!-- Footer -->
-        <footer class="py-3 bg-grey float-bottom">
-            <p class="m-0 text-dark text-center ">Copyright &copy; <script>document.write(new Date().getFullYear())</script>, Open Cybernetics Все права защищены.</p>
-            <p class="m-0 text-muted h6 text-center ">Сайт разработан на Python, Django</p>
-        </footer>
+            <!-- Footer -->
+            <footer class="py-3 bg-grey float-bottom">
+                <p class="m-0 text-dark text-center ">Copyright &copy; <script>document.write(new Date().getFullYear())</script>, Open Cybernetics Все права защищены.</p>
+                <p class="m-0 text-muted h6 text-center ">Сайт разработан на Python, Django</p>
+            </footer>
+
+            <!-- <ul class="bg-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul> -->
+        </div>
     </body>
 </html>

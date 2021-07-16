@@ -16,10 +16,16 @@
         hr.solid {
             border-top: 3px solid #bbb;
         }
+
+        @media screen and (max-width: 768px) {
+            body:not(.home) #sidebar {
+                display: none;
+            }
+        }
 </style>
 
 <!-- Sidebar Widgets Column -->
-<div class="col-md-4 float-right ">
+<div class="col-md-4 float-right" id="sidebar">
     <div class="card my-4">
         <div class="card-body">
             <h5>Последние новости</h5>
