@@ -26,7 +26,21 @@ def html_edit(value):
     
     # Add id to image (for open by click)
     for img in soup.find_all('img'):
-        img['class'] = 'popup-image'
+        # img['class'] = 'popup-image'
+        link = img['src']
+        a_tag = soup.new_tag('a')
+        a_tag['href'] = link
+        a_tag['class'] = 'fancylight popup-btn'
+        a_tag['data-fancybox-group'] = 'light'
+
+        img_tag = soup.new_tag('img')
+        img_tag['class'] = 'lazy img-fluid'
+        img_tag['alt'] = ""
+        img_tag['data-src'] = link
+        
+        a_tag.append(img_tag)
+        img.parent.append(a_tag)
+        img.extract()
     
     # Replace all youtube-link to iframe video integrated to html code
     for a in soup.find_all(text="youtube-link"):

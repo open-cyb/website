@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'projects',
     'articles',
     'articles.templatetags',
-    'users'
+    'users',
+    'gallery'
 ]
 
 SITE_ID = 1
@@ -145,6 +146,8 @@ STATICFILES_FINDERS = (
 )
 
 MEDIA_URL = '/media/'
+
+MEDIA_ROOT = '/var/www/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
