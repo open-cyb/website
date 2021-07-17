@@ -56,6 +56,11 @@
                         <li class="nav-item text-black">
                             <a class="nav-link text-black font-weight-bold" href="{% url 'contacts_page' %}">О нас</a>
                         </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item text-black">
+                                <a class="nav-link text-black font-weight-bold" href="{% url 'snippets_page' %}">Snippets</a>
+                            </li>
+                        {% endif %}
                     </ul>
                     <form class="form-inline" method="post" action="{% url 'search_page' %}">
                         {% csrf_token %}

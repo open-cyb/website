@@ -30,4 +30,6 @@ urlpatterns = [
     path('search', views.search, name='search_page'),
     path('contacts/', include('users.urls')),
     path('gallery/', include('gallery.urls')),
+    path('s/', include('urlshortener.urls')),
+    path('snippets/', include('snippets.urls')),
 ] # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

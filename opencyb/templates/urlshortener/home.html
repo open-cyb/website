@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header text-center py-3">
+            <h1>Сокращатель ссылок <i class="fas fa-link px-2"></i></h1>
+        </div>
+        <div class="px-3 py-4">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="row g-1">
+                    <div class="col-10">{{form.long_url}}</div>
+                    <div class="col-2">
+                        <button class="btn btn-success btn-lg w-100" type="submit">
+                            Shorten
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if errors %}
+        <div class="alert alert-danger mt-4" role="alert">
+            <p>{{errors}}</p>
+        </div>
+    {% endif %}
+  
+    {% if new_url %}
+        <div class="mx-auto text-center mt-5">
+            <h2 class="text-danger">Сокращенный URL</h2>
+            <p class=""><span class="text-danger">Сокращенный URL: </span>{{new_url}}</p>
+            <p><span class="text-danger">Прежний URL:</span> {{long_url}}</p>
+        </div>
+    {% endif %}
+
+  </div>
+
+{% endblock content %}

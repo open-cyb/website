@@ -33,6 +33,7 @@ SECRET_KEY = secret_credentials.secret_key['key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+# DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -51,7 +52,9 @@ INSTALLED_APPS = [
     'articles',
     'articles.templatetags',
     'users',
-    'gallery'
+    'gallery',
+    'urlshortener',
+    'snippets'
 ]
 
 SITE_ID = 1
