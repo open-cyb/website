@@ -43,3 +43,11 @@ body {
 .card {
     box-shadow: 0 16px 48px #E3E7EB;
 }
+
+/* .code-snippet {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+    float: none!important;
+} */

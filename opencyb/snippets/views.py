@@ -18,9 +18,9 @@ def snippet_detail(request, slug):
 
     code = snippet.code
     from pygments import highlight
-    from pygments.lexers import guess_lexer
+    from pygments.lexers import get_lexer_by_name
     from pygments.formatters import HtmlFormatter
-    lexer = guess_lexer(code)
+    lexer = get_lexer_by_name(str(snippet.language).lower(), stripall=True)
     formatter = HtmlFormatter(linenos=True, cssclass='codehilite')
     result = highlight(code, lexer, formatter)
     context['code'] = result

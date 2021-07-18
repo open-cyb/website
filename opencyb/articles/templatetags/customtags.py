@@ -63,7 +63,31 @@ def html_edit(value):
         a.parent.parent.append(div_video_tag)
 
         a.parent.extract() # Remove <a> with href (custom markdown style)
-        
+    
+    for a in soup.find_all(text="code-snippet"):
+        link = a.parent['href']
+
+        div_snippet_tag = soup.new_tag('div')
+        div_snippet_tag['class'] = 'code-snippet'
+
+        import urllib3
+        http = urllib3.PoolManager()
+        response = http.request('GET', link)
+
+        soup_snippet = BeautifulSoup(response.data.decode('utf-8'), "html.parser")
+        table_snippet = soup_snippet.find_all("table", {'class': 'codehilitetable'})[0]
+
+        div_snippet_tag.append(table_snippet)
+        a.parent.parent.append(div_snippet_tag)
+        a.parent.extract()
+
+        # from pygments import highlight
+        # from pygments.lexers import get_lexer_by_name
+        # from pygments.formatters import HtmlFormatter
+        # lexer = get_lexer_by_name(str(snippet.language).lower(), stripall=True)
+        # formatter = HtmlFormatter(linenos=True, cssclass='codehilite')
+        # result = highlight(code, lexer, formatter)
+        # context['code'] = result
         
     for link in soup.find_all('a', href=True):
         link['target'] = '_blank'

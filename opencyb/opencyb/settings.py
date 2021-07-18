@@ -32,8 +32,8 @@ secret_credentials = SourceFileLoader('module.secret_credentials', '{}/secret_cr
 SECRET_KEY = secret_credentials.secret_key['key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = True
+# DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
