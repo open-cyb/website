@@ -56,12 +56,22 @@
                         <li class="nav-item text-black">
                             <a class="nav-link text-black font-weight-bold" href="{% url 'contacts_page' %}">О нас</a>
                         </li>
-                        {% if user.is_authenticated %}
-                            <li class="nav-item text-black">
-                                <a class="nav-link text-black font-weight-bold" href="{% url 'snippets_page' %}">Snippets</a>
-                            </li>
-                        {% endif %}
                     </ul>
+                    {% if user.is_authenticated %}
+                        <ul class="navbar-nav ml-auto" style="margin-right:20px;">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'snippets_page' %}">Snippets</a>
+                                    <a class="dropdown-item" href="{% url 'urlshortener_home' %}">Url Short</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'admin:index' %}">Admin panel</a>
+                                </div>
+                            </li>
+                        </ul>
+                    {% endif %}
                     <form class="form-inline" method="post" action="{% url 'search_page' %}">
                         {% csrf_token %}
                         <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search" name="searched">
