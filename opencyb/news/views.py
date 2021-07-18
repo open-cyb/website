@@ -7,14 +7,10 @@ from django.contrib import messages
 
 class NewsList(generic.ListView):
     queryset = New.objects.filter(status=1).order_by('-created_on')
-    template_name = 'news_page.html'
-
-class NewDetail(generic.DetailView):
-    model = New
-    template_name = 'new_detail.html'
+    template_name = 'news/news_page.html'
 
 def new_detail(request, slug):
-    template_name = 'new_detail.html'
+    template_name = 'news/new_detail.html'
     new = get_object_or_404(New, slug=slug)
     comments = new.comments.filter(active=True)
     new_comment = None

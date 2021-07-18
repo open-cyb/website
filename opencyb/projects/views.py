@@ -7,14 +7,10 @@ from django.contrib import messages
 
 class ProjectsList(generic.ListView):
     queryset = Project.objects.filter(status=1).order_by('-created_on')
-    template_name = 'projects_page.html'
-
-class ProjectDetail(generic.DetailView):
-    model = Project
-    template_name = 'project_detail.html'
+    template_name = 'projects/projects_page.html'
 
 def project_detail(request, slug):
-    template_name = 'project_detail.html'
+    template_name = 'projects/project_detail.html'
     project = get_object_or_404(Project, slug=slug)
     comments = project.comments.filter(active=True)
     new_comment = None

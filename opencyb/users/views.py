@@ -4,7 +4,7 @@ from .models import Profile
 import json
 
 def profiles_page(request):
-    template_name = 'contacts.html'
+    template_name = 'users/contacts.html'
     profiles = Profile.objects.all()
 
     context = {}
@@ -29,7 +29,7 @@ def profiles_page(request):
     return render(request, template_name, context)
 
 def profile_detail(request, slug):
-    template_name = 'profile_detail.html'
+    template_name = 'users/profile_detail.html'
     profile = get_object_or_404(Profile, slug=slug)
     links_json = None
     context = {}

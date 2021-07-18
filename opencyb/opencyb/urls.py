@@ -26,10 +26,9 @@ urlpatterns = [
     path('news/', include('news.urls')),
     path('projects/', include('projects.urls')),
     path('articles/', include('articles.urls')),
-    # path('contacts/', TemplateView.as_view(template_name='contacts.html'), name='contacts_page'),
     path('search', views.search, name='search_page'),
     path('contacts/', include('users.urls')),
     path('gallery/', include('gallery.urls')),
     path('s/', include('urlshortener.urls')),
     path('snippets/', include('snippets.urls')),
-] # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]

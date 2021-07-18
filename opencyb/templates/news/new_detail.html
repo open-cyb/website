@@ -16,10 +16,10 @@
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
 
     {% with post=new %}
-      {% block comments %} {% include 'post_comments.html' %} {% endblock %}
+      {% block comments %} {% include 'post_comments/post_comments.html' %} {% endblock %}
     {% endwith %}
 
-    {% block comment_form %} {% include 'post_comment_form.html' %} {% endblock %}
+    {% block comment_form %} {% include 'post_comments/post_comment_form.html' %} {% endblock %}
   </div>
 </div>
 

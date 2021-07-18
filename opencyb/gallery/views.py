@@ -5,4 +5,4 @@ import django.views.generic as generic
 
 class PhotosList(generic.ListView):
     queryset = Photo.objects.order_by('-created_on')
-    template_name = 'gallery.html'
+    template_name = 'gallery/gallery.html'

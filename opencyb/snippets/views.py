@@ -8,7 +8,7 @@ def snippets_list(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(request.build_absolute_uri('/'))
     
-    template_name = 'snippets_app/snippets_page.html'
+    template_name = 'snippets/snippets_page.html'
     context = {}
     queryset = Snippet.objects.order_by('-created_on')
 
@@ -29,7 +29,7 @@ def snippets_list(request):
         return render(request, template_name, context)
 
 def snippet_detail(request, slug):
-    template_name = 'snippets_app/snippet_detail.html'
+    template_name = 'snippets/snippet_detail.html'
     snippet = get_object_or_404(Snippet, slug=slug)
     
     context = {
@@ -52,7 +52,7 @@ def snippet_upload(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(request.build_absolute_uri('/'))
 
-    template_name = 'snippets_app/snippet_upload.html'
+    template_name = 'snippets/snippet_upload.html'
 
     context = {}
 
@@ -76,7 +76,7 @@ def snippet_edit(request, slug):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(request.build_absolute_uri('/'))
     
-    template_name = 'snippets_app/snippet_edit.html'
+    template_name = 'snippets/snippet_edit.html'
 
     context = {}
 

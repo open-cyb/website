@@ -113,7 +113,7 @@ def custom_markdown(value):
     html = markdown.markdown(md_text, extensions=['fenced_code', 'codehilite', 'tables'])
     return html
 
-@register.inclusion_tag('snippets/recent_articles.html')
+@register.inclusion_tag('recent/recent_articles.html')
 def render_recent_articles():
     recent_articles_list = articles_models.Article.objects.filter(status=1)[:3]
     
@@ -121,7 +121,7 @@ def render_recent_articles():
         'articles_list': recent_articles_list
     }
 
-@register.inclusion_tag('snippets/recent_news.html')
+@register.inclusion_tag('recent/recent_news.html')
 def render_recent_news():
     recent_news_list = news_models.New.objects.all().filter(status=1)[:3]
     
@@ -129,7 +129,7 @@ def render_recent_news():
         'news_list': recent_news_list
     }
 
-@register.inclusion_tag('snippets/recent_projects.html')
+@register.inclusion_tag('recent/recent_projects.html')
 def render_recent_projects():
     recent_projects_list = projects_models.Project.objects.all().filter(status=1)[:3]
     
@@ -137,7 +137,7 @@ def render_recent_projects():
         'projects_list': recent_projects_list
     }
 
-@register.inclusion_tag('snippets/recent_comments.html', takes_context=True)
+@register.inclusion_tag('recent/recent_comments.html', takes_context=True)
 def render_recent_comments(context):
     domain = context['request'].headers['Host']
     template_url = 'http://{}/{}/{}/#comment-{}'
