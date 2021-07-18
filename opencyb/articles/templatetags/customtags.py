@@ -1,5 +1,6 @@
 from django import template
 from bs4 import BeautifulSoup
+from django.shortcuts import get_object_or_404
 import markdown
 from django.urls import reverse
 from django.contrib.sites.shortcuts import get_current_site
@@ -64,33 +65,43 @@ def html_edit(value):
 
         a.parent.extract() # Remove <a> with href (custom markdown style)
     
+
+    for link in soup.find_all('a', href=True):
+        link['target'] = '_blank'
+
+
     for a in soup.find_all(text="code-snippet"):
         link = a.parent['href']
 
         div_snippet_tag = soup.new_tag('div')
         div_snippet_tag['class'] = 'code-snippet'
+        div_snippet_tag['style'] = 'margin-bottom: 15px;'
 
-        import urllib3
-        http = urllib3.PoolManager()
-        response = http.request('GET', link)
+        from snippets import models as snippets_models
+        snippet_slug = link.rstrip('/').split('/')[-1]
+        snippet = get_object_or_404(snippets_models.Snippet, slug=snippet_slug)
+        
+        from pygments import highlight
+        from pygments.lexers import get_lexer_by_name
+        from pygments.formatters import HtmlFormatter
+        lexer = get_lexer_by_name(str(snippet.language).lower(), stripall=True)
+        formatter = HtmlFormatter(linenos=True, cssclass='codehilite')
+        result = highlight(snippet.code, lexer, formatter)
 
-        soup_snippet = BeautifulSoup(response.data.decode('utf-8'), "html.parser")
-        table_snippet = soup_snippet.find_all("table", {'class': 'codehilitetable'})[0]
+        snippet_share_tag = soup.new_tag('a')
+        snippet_share_tag['class'] = 'card-text text-muted h6 float-left mt-0'
+        snippet_share_tag['id'] = snippet_slug
+        snippet_share_tag['href'] = link
+        snippet_share_tag['target'] = '_blank'
+        snippet_share_tag['style'] = 'position: absolute; right: 0; margin-right: 5%;'
+        snippet_share_tag.append('Поделиться')
 
-        div_snippet_tag.append(table_snippet)
+        div_snippet_tag.append(BeautifulSoup(result, 'html.parser'))
+        div_snippet_tag.append(snippet_share_tag)
+        div_snippet_tag.append(BeautifulSoup('<br>', 'html.parser'))
         a.parent.parent.append(div_snippet_tag)
         a.parent.extract()
-
-        # from pygments import highlight
-        # from pygments.lexers import get_lexer_by_name
-        # from pygments.formatters import HtmlFormatter
-        # lexer = get_lexer_by_name(str(snippet.language).lower(), stripall=True)
-        # formatter = HtmlFormatter(linenos=True, cssclass='codehilite')
-        # result = highlight(code, lexer, formatter)
-        # context['code'] = result
         
-    for link in soup.find_all('a', href=True):
-        link['target'] = '_blank'
     
     html_content = str(soup)
     
