@@ -14,6 +14,18 @@
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
+            <div class="raw">
+                <a href="{% url 'snippet_upload'  %}" class="btn btn-outline-success float-right">Новый Snippet</a>
+                <form class="form-inline" method="post" action="">
+                    {% csrf_token %}
+                    <input class="form-control mr-sm-2" type="search" placeholder="Название" aria-label="Search" name="filtered">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Фильтр</button>
+                </form>
+            </div>
+            <br>
+            {% if filtered_not_results %}
+                <p>Нет результатов</p>
+            {% endif %}
             {% for snippet in snippet_list %}
             <div class="card mb-4">
                 <div class="card-body">
@@ -23,11 +35,13 @@
                             <p class="float-right">Язык: {{ snippet.language }}</p>
                         </a>
                     </div>
-                    <div class="card-footer text-muted" style="height:40px">
-                        <div class="float-left m-0">
-                            <p class="card-text text-muted h6 float-left mt-0">Дата: {{ snippet.created_on }}</p>
-                        </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="float-left m-0">
+                        <p class="card-text text-muted h6 float-left mb-0">Дата: {{ snippet.created_on}}</p>
                     </div>
+                    <a href="{% url 'snippet_edit' snippet.slug  %}" class="btn btn-outline-info float-right">Изменить</a>
+                    <a href="{% url 'snippet_detail' snippet.slug  %}" class="btn btn-outline-info float-right" style="margin-right: 10px;">Открыть</a>
                 </div>
             </div>
             {% endfor %}

@@ -4,9 +4,29 @@ import django.views.generic as generic
 from .models import Snippet
 from .forms import SnippetForm
 
-class SnippetsList(generic.ListView):
-    queryset = Snippet.objects.order_by('-created_on')
+def snippets_list(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(request.build_absolute_uri('/'))
+    
     template_name = 'snippets_app/snippets_page.html'
+    context = {}
+    queryset = Snippet.objects.order_by('-created_on')
+
+    if request.method == 'GET':
+        context['snippet_list'] = queryset
+        return render(request, template_name, context)
+    
+    elif request.method == 'POST':
+        filtered = request.POST['filtered']
+        if filtered == '':
+            queryset = Snippet.objects.order_by('-created_on')
+        else:
+            queryset = Snippet.objects.filter(title__contains=filtered)
+            if len(queryset) == 0:
+                context['filtered_not_results'] = True
+        
+        context['snippet_list'] = queryset
+        return render(request, template_name, context)
 
 def snippet_detail(request, slug):
     template_name = 'snippets_app/snippet_detail.html'
@@ -30,7 +50,7 @@ def snippet_detail(request, slug):
 
 def snippet_upload(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(request.build_absolute_uri('/snippets/'))
+        return HttpResponseRedirect(request.build_absolute_uri('/'))
 
     template_name = 'snippets_app/snippet_upload.html'
 
@@ -49,5 +69,31 @@ def snippet_upload(request):
             return HttpResponseRedirect(request.build_absolute_uri('/snippets/' + snippet_object.slug))
         
         context['errors'] = user_form.errors
+
+        return render(request, template_name, context)
+
+def snippet_edit(request, slug):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(request.build_absolute_uri('/'))
+    
+    template_name = 'snippets_app/snippet_edit.html'
+
+    context = {}
+
+    edit_form = SnippetForm(instance = Snippet.objects.get(slug=slug))
+    context['form'] = edit_form
+
+    if request.method == 'GET':
+        return render(request, template_name, context)
+    
+    elif request.method == 'POST':
+        instance = get_object_or_404(Snippet, slug=slug)
+        edit_form = SnippetForm(request.POST, instance=instance)
+
+        if edit_form.is_valid():
+            snippet_object = edit_form.save()
+            return HttpResponseRedirect(request.build_absolute_uri('/snippets/' + snippet_object.slug))
+        
+        context['errors'] = edit_form.errors
 
         return render(request, template_name, context)

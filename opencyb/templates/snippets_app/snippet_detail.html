@@ -12,6 +12,10 @@
         <br><br>
         <!-- <p class="card-text ">{{ snippet.code }}</p> -->
         {{ code | safe }}
+        {% if user.is_authenticated %}
+          <br>
+          <a href="{% url 'snippet_edit' snippet.slug  %}" class="btn btn-outline-info float-right">Изменить</a>
+        {% endif %} 
       </div>
     </div>
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}    
