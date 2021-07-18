@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 left">
+            <div class="raw">
+                <a href="{% url 'shortener_upload_page'  %}" class="btn btn-outline-success float-right">Сократить ссылку</a>
+            </div>
+            <br><br>
+            {% for shortener in shorteners %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p class="card-text"><a href="{{ shortener.short_url }}" target="_blank">Short URL</a> <=> <a class="text-muted" href="{{ shortener.short_url }}" target="_blank">{{ shortener.short_url }}</a></p>
+                    <p class="card-text"><a href="{{ shortener.long_url }}" target="_blank">Long URL</a> <=> <a class="text-muted" href="{{ shortener.long_url }}" target="_blank">{{ shortener.long_url }}</a></p>
+                    <p class="card-text">Кол-во переходов: {{ shortener.times_followed }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="float-left m-0">
+                        <p class="card-text text-muted h6 float-top mb-0">Дата: {{ shortener.created_on}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+    </div>
+</div>
+{%endblock%}

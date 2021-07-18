@@ -3,18 +3,34 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Shortener
 from .forms import ShortenerForm
 
-def home_view(request):
+def shorteners_page(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(request.build_absolute_uri('/'))
+    
+    template_name = 'urlshortener/shorteners_page.html'
+    context = {}
+
+    shorteners = Shortener.objects.all()
+
+    for shortener in shorteners:
+        shortener.short_url = request.build_absolute_uri('/s/'+shortener.short_url)
+    
+    context['shorteners'] = shorteners
+
+    return render(request, template_name, context)
+
+def shortener_upload(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(request.build_absolute_uri('/'))
 
-    template = 'urlshortener/home.html'
+    template_name = 'urlshortener/shortener_upload.html'
 
     context = {}
 
     context['form'] = ShortenerForm()
 
     if request.method == 'GET':
-        return render(request, template, context)
+        return render(request, template_name, context)
     
     elif request.method == 'POST':
         used_form = ShortenerForm(request.POST)
@@ -25,11 +41,11 @@ def home_view(request):
             long_url = shortened_object.long_url
             context['new_url'] = new_url
             context['long_url'] = long_url
-            return render(request, template, context)
+            return render(request, template_name, context)
         
         context['errors'] = used_form.errors
 
-        return render(request, template, context)
+        return render(request, template_name, context)
 
 def redirect_url_view(request, shortened_part):    
     try:
