@@ -7,9 +7,27 @@ from django.contrib import messages
 from django.utils.text import slugify
 from unidecode import unidecode
 
-class ArticlesList(generic.ListView):
-    queryset = Article.objects.filter(status=1).order_by('-created_on')
+def articles_list(request):
     template_name = 'articles/articles_page.html'
+    context = {}
+    queryset = Article.objects.order_by('-created_on').filter(status=1)
+    queryset_drafts_only = Article.objects.filter(status=0)
+
+    if request.method == 'GET':
+        context['article_list'] = queryset
+        context['posted'] = True
+        return render(request, template_name, context)
+    
+    elif request.method == 'POST':
+        a_select = request.POST.get('a_select')
+        if a_select == 'Публикации':
+            context['posted'] = True
+            context['article_list'] = queryset
+        elif a_select == 'Только черновики':
+            context['drafts_only'] = True
+            context['article_list'] = queryset_drafts_only
+        
+        return render(request, template_name, context)
 
 def article_detail(request, slug):
     template_name = 'articles/article_detail.html'
