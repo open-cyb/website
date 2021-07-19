@@ -8,6 +8,10 @@
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
+            {% if user.is_authenticated %}
+                <a href="{% url 'new_upload' %}" class="btn btn-outline-info float-right">Загрузить новую новость</a>
+                <br><br>
+            {% endif %} 
             {% for new in new_list %}
             <div class="card mb-4">
                 <div class="card-body">

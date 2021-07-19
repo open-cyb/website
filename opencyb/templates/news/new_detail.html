@@ -7,6 +7,11 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 card mb-4  mt-3 left  top">
+      {% if user.is_authenticated %}
+        <div class="raw">
+          <a href="{% url 'new_edit' new.slug  %}" class="btn btn-outline-info float-right" style="margin-top:10px;">Изменить</a>
+        </div>
+      {% endif %} 
       <div class="card-body">
         <h1>{% block title %} {{ new.title }} {% endblock title %}</h1>
         <p class=" text-muted">{{ new.author }} | {{ new.created_on }}</p>
