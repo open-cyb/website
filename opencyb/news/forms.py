@@ -26,11 +26,9 @@ class NewForm(forms.ModelForm):
         fields = ('title', 'slug', 'author', 'content', 'status')
 
 class CommentForm(forms.ModelForm):
-    # name = forms.CharField(label="Имя", required=True)
-    # email = forms.EmailField(label="Email", required=False)
-    # body = forms.CharField(label="Текст", required=True)
     class Meta:
         model = Comment
+        
         fields = ('name', 'email', 'website', 'body')
         requireds={'website':False}
         labels = {
