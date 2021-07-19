@@ -5,9 +5,14 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles/postpagecontent.css' %}"/>
 
 <div class="container">
+
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
+            {% if user.is_authenticated %}
+                <a href="{% url 'article_upload' %}" class="btn btn-outline-info float-right">Загрузить новую статью</a>
+                <br><br>
+            {% endif %} 
             {% for article in article_list %}
             <div class="card mb-4">
                 <div class="card-body">

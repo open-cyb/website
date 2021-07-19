@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header text-center py-1">
+            <h2>Редактирование статьи</h2>
+        </div>
+        <div class="px-3 py-4">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="row g-1">
+                    <div class="col-11">{{form.title}}</div>
+                    <br>
+                    {% comment %} <div class="col-11">{{form.slug}}</div>
+                    <br> {% endcomment %}
+                    <div class="col-3">{{form.author}}</div>
+                    <br>
+                    <div class="col-11">{{form.content}}</div>
+                    <br>
+                    <div class="col-3">{{form.status}}</div>
+                </div>
+                <div class="row g-1 col-2">
+                    <button class="btn btn-success btn-lg w-100" type="submit">Применить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if errors %}
+        <div class="alert alert-danger mt-4" role="alert">
+            <p>{{ errors }}</p>
+        </div>
+    {% endif %}
+
+  </div>
+
+{% endblock content %}

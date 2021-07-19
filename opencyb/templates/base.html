@@ -61,11 +61,13 @@
                         <ul class="navbar-nav ml-auto" style="margin-right:20px;">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Admin
+                                    {{ user.username }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{% url 'snippets_page' %}">Snippets</a>
                                     <a class="dropdown-item" href="{% url 'shorteners_page' %}">Url Short</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'article_upload' %}">Upload Article</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{% url 'admin:index' %}">Admin panel</a>
                                 </div>

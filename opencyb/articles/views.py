@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Article
-from .forms import CommentForm
+from .forms import ArticleForm, CommentForm
 import django.views.generic as generic
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.utils.text import slugify
+from unidecode import unidecode
 
 class ArticlesList(generic.ListView):
     queryset = Article.objects.filter(status=1).order_by('-created_on')
@@ -35,3 +37,53 @@ def article_detail(request, slug):
                                             'comments': comments,
                                             'new_comment': new_comment,
                                             'comment_form': comment_form })
+
+def article_edit(request, slug):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(request.build_absolute_uri('/'))
+    
+    template_name = 'articles/article_edit.html'
+    context = {}
+    edit_form = ArticleForm(instance = Article.objects.get(slug=slug))
+    context['form'] = edit_form
+
+    if request.method == 'GET':
+        return render(request, template_name, context)
+    
+    elif request.method == 'POST':
+        instance = get_object_or_404(Article, slug=slug)
+        edit_form = ArticleForm(request.POST, instance=instance)
+
+        if edit_form.is_valid():
+            article_object = edit_form.save(commit=False)
+            article_object.slug = slugify(unidecode(article_object.title))
+            article_object.save()
+            return HttpResponseRedirect(request.build_absolute_uri('/articles/' + article_object.slug))
+        
+        context['errors'] = edit_form.errors
+
+        return render(request, template_name, context)
+
+def article_upload(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(request.build_absolute_uri('/'))
+    
+    template_name = 'articles/article_upload.html'
+    context = {}
+    context['form'] = ArticleForm()
+
+    if request.method == 'GET':
+        return render(request, template_name, context)
+    
+    elif request.method == 'POST':
+        a_form = ArticleForm(request.POST)
+
+        if a_form.is_valid():
+            article_object = a_form.save(commit=False)
+            article_object.slug = slugify(unidecode(article_object.title))
+            article_object.save()
+            return HttpResponseRedirect(request.build_absolute_uri('/articles/' + article_object.slug))
+        
+        context['errors'] = a_form.errors
+
+        return render(request, template_name, context)
