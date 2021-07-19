@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-# from .forms import UserUpdateForm, ProfileUpdateForm
+from django.urls.resolvers import get_resolver
+from .forms import ProfileUpdateForm
 from .models import Profile
 import json
+from django.http import HttpResponseRedirect
 
 def profiles_page(request):
     template_name = 'users/contacts.html'
@@ -44,3 +46,27 @@ def profile_detail(request, slug):
     context['profile'] = profile
 
     return render(request, template_name, context)
+
+def profile_edit(request, slug):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(request.build_absolute_uri('/'))
+    
+    template_name = 'users/profile_edit.html'
+    context = {}
+    edit_form = ProfileUpdateForm(instance = Profile.objects.get(slug=slug))
+    context['form'] = edit_form
+
+    if request.method == 'GET':
+        return render(request, template_name, context)
+    
+    elif request.method == 'POST':
+        instance = get_object_or_404(Profile, slug=slug)
+        edit_form = ProfileUpdateForm(request.POST, instance=instance)
+
+        if edit_form.is_valid():
+            profile_object = edit_form.save()
+            return HttpResponseRedirect(request.build_absolute_uri('/contacts/' + profile_object.slug))
+        
+        context['errors'] = edit_form.errors
+
+        return render(request, template_name, context)
