@@ -71,3 +71,10 @@ def file_edit(request, slug):
         context['errors'] = edit_form.errors
 
         return render(request, template_name, context)
+
+def file_delete(request, slug):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(request.build_absolute_uri('/'))
+    
+    File.objects.get(slug=slug).delete()
+    return HttpResponseRedirect(request.build_absolute_uri('/filestorage/'))
