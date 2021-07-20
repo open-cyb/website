@@ -3,5 +3,6 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('', views.PhotosList.as_view(), name='gallery')
+    path('', views.photos_list, name='gallery'),
+    path('upload/', views.photo_upload, name='photo_upload')
 ]
