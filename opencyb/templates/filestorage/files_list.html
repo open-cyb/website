@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8 mt-3 left">
+            <div class="raw">
+                <a href="{% url 'filestorage_file_upload'  %}" class="btn btn-outline-success float-right">Загрузить файл</a>
+            </div>
+            <br><br>
+            {% for file in file_list %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    {% comment %} <a href="{% url 'filestorage_redirect' file.slug %}" target="_blank" download>{{ file.title }}</a> {% endcomment %}
+                    <p class="card-text">
+                        {{ file.title }} - {{ file.description }}
+                        <br>
+                        Ссылка: {{ request.build_absolute_uri }}{{ file.slug }}
+                    </p>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="float-left m-0">
+                        <p class="card-text text-muted h6 float-top mb-0">Дата: {{ file.created_on}}</p>
+                        <p class="card-text text-muted h6 float-bottom mt-0">Автор: {{ file.author }}</p>
+                    </div>
+                    <a href="{% url 'filestorage_redirect' file.slug  %}" class="btn btn-outline-info float-right" download>Скачать</a>
+                    <a href="{% url 'filestorage_file_edit' file.slug  %}" class="btn btn-outline-info float-right" style="margin-right: 5px;">Изменить</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+    </div>
+</div>
+{%endblock%}

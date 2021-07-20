@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header text-center py-1">
+            <h2>Загрузить файл</h2>
+        </div>
+        <div class="px-3 py-4">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% comment %} {{ form.as_p }} {% endcomment %}
+                <div class="row g-1">
+                    <div class="col-10">Название: {{ form.title }}</div>
+                    <br>
+                    <div class="col-3">Автор: {{ form.author }}</div>
+                    <br>
+                    <div class="col-10" style="margin-bottom:10px;">Файл: <p class="text-muted mb-0 ml-1">НЕ ЗАГРУЖАТЬ файлы, в имени которых кириллица или все, что не en_US.UTF-8</p> <br> {{ form.file }}</div>
+                    <br>
+                    <div class="col-10">Описание: {{ form.description }}</div>
+                </div>
+                <div class="row g-1 col-2">
+                    <button class="btn btn-success btn-lg w-100" type="submit">Загрузить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if errors %}
+        <div class="alert alert-danger mt-4" role="alert">
+            <p>{{ errors }}</p>
+        </div>
+    {% endif %}
+
+  </div>
+
+{% endblock content %}

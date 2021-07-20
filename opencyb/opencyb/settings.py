@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'users',
     'gallery',
     'urlshortener',
-    'snippets'
+    'snippets',
+    'filestorage'
 ]
 
 SITE_ID = 1

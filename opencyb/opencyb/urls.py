@@ -31,4 +31,5 @@ urlpatterns = [
     path('gallery/', include('gallery.urls')),
     path('s/', include('urlshortener.urls')),
     path('snippets/', include('snippets.urls')),
+    path('filestorage/', include('filestorage.urls')),
 ]
