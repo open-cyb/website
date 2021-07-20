@@ -8,6 +8,7 @@
             </div>
             <br><br>
             {% for shortener in shorteners %}
+            {% block modal %} {% include 'urlshortener/modal.html' %} {% endblock modal %}
             <div class="card mb-4">
                 <div class="card-body">
                     <p class="card-text"><a href="{{ shortener.short_url }}" target="_blank">Short URL</a> <=> <a class="text-muted" href="{{ shortener.short_url }}" target="_blank">{{ shortener.short_url }}</a></p>
@@ -19,6 +20,7 @@
                         <p class="card-text text-muted h6 float-top mb-0 float-top">Дата: {{ shortener.created_on }}</p>
                         <p class="card-text text-muted h6 float-top mb-0 float-bottom">Автор: {{ shortener.author }}</p>
                     </div>
+                    <button type="button" class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#exampleModalCenter" style="margin-right: 5px;">Удалить</button>
                 </div>
             </div>
             {% endfor %}

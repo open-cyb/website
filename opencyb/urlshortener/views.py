@@ -13,8 +13,9 @@ def shorteners_page(request):
     shorteners = Shortener.objects.all()
 
     for shortener in shorteners:
+        shortener.short_url_slug = shortener.short_url
         shortener.short_url = request.build_absolute_uri('/s/'+shortener.short_url)
-    
+            
     context['shorteners'] = shorteners
 
     return render(request, template_name, context)
@@ -41,7 +42,8 @@ def shortener_upload(request):
             long_url = shortened_object.long_url
             context['new_url'] = new_url
             context['long_url'] = long_url
-            return render(request, template_name, context)
+            #return render(request, template_name, context)
+            return HttpResponseRedirect(request.build_absolute_uri('/s/'))
         
         context['errors'] = used_form.errors
 
@@ -56,3 +58,11 @@ def redirect_url_view(request, shortened_part):
         return HttpResponseRedirect(shortener.long_url)
     except:
         raise Http404('Ссылка невалидна.')
+
+def shortener_delete(request, shortened_part):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(request.build_absolute_uri('/'))
+    
+    Shortener.objects.get(short_url=shortened_part).delete()
+
+    return HttpResponseRedirect(request.build_absolute_uri('/s/'))
