@@ -15,6 +15,9 @@ def photos_list(request):
     return render(request, template_name, context)
 
 def photo_upload(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(request.build_absolute_uri('/'))
+    
     template_name = 'gallery/photo_upload.html'
     context = {}
     context['form'] = PhotoForm()
