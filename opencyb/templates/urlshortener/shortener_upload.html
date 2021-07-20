@@ -9,8 +9,11 @@
             <form action="" method="POST">
                 {% csrf_token %}
                 <div class="row g-1">
-                    <div class="col-10">{{form.long_url}}</div>
-                    <div class="col-2">
+                    <div class="col-12">URL: {{form.long_url}}</div>
+                    <br>
+                    <div class="col-12">Автор: {{ form.author }}</div>
+                    <br>
+                    <div class="col-3">
                         <button class="btn btn-success btn-lg w-100" type="submit">
                             Shorten
                         </button>
