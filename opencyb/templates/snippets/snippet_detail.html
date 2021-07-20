@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
+{% block modal %} {% include 'snippets/modal.html' %} {% endblock modal %}
+
 <div class="container">
   <div class="row">
     <div class="col-md-8 card mb-4  mt-3 left  top">
@@ -15,6 +17,7 @@
         {% if user.is_authenticated %}
           <br>
           <a href="{% url 'snippet_edit' snippet.slug  %}" class="btn btn-outline-info float-right">Изменить</a>
+          <button type="button" class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#exampleModalCenter" style="margin-right: 5px;">Удалить</button>
         {% endif %} 
       </div>
     </div>

@@ -97,3 +97,11 @@ def snippet_edit(request, slug):
         context['errors'] = edit_form.errors
 
         return render(request, template_name, context)
+
+def snippet_delete(request, slug):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(request.build_absolute_uri('/'))
+    
+    Snippet.objects.get(slug=slug).delete()
+    
+    return HttpResponseRedirect(request.build_absolute_uri('/snippets/'))

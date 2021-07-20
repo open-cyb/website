@@ -27,6 +27,7 @@
                 <p>Нет результатов</p>
             {% endif %}
             {% for snippet in snippet_list %}
+            {% block modal %} {% include 'snippets/modal.html' %} {% endblock modal %}
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="snippet-link">
@@ -42,7 +43,8 @@
                         <p class="card-text text-muted h6 float-bottom mt-0">Автор: {{ snippet.author }}</p>
                     </div>
                     <a href="{% url 'snippet_detail' snippet.slug  %}" class="btn btn-outline-info float-right">Открыть</a>
-                    <a href="{% url 'snippet_edit' snippet.slug  %}" class="btn btn-outline-info float-right" style="margin-right: 10px;">Изменить</a>
+                    <button type="button" class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#exampleModalCenter" style="margin-right: 5px;">Удалить</button>
+                    <a href="{% url 'snippet_edit' snippet.slug  %}" class="btn btn-outline-info float-right" style="margin-right: 5px;">Изменить</a>
                 </div>
             </div>
             {% endfor %}
