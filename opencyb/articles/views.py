@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.utils.text import slugify
 from unidecode import unidecode
+from django.contrib.auth.models import User
 
 def articles_list(request):
     template_name = 'articles/articles_page.html'
